@@ -67,6 +67,19 @@ const spots = [
     rewardText: 'にいがたスタンプ'
   },
   {
+    id: 'ramen-tsumugi',
+    name: 'らぁめん 紬麦',
+    area: 'ラーメン',
+    lat: 37.922262626570486, 
+    lng: 139.04530061534362,
+    description: '店主のこだわり「淡麗醤油らぁめん」と「生姜醤油らぁめん」',
+    highlight: '豊富でお得なトッピングで自分好みの1杯に。',
+    address: '新潟県新潟市中央区古町通7番町951-5',
+    hours: '11:00-14:00 / 17:00-20:00',
+    image: 'https://things-niigata.jp/wp-content/uploads/2025/03/tsumugi_06.jpg',
+    rewardText: 'にいがたスタンプ'
+  },
+  {
     id: 'tonkatsu-taro',
     name: 'とんかつ太郎',
     area: '新潟グルメ',
@@ -226,8 +239,8 @@ const spots = [
     id: 'kirei',
     name: '台湾 キレイ 茶芸大使館',
     area: 'カフェ・喫茶店',
-    lat: 37.9164,
-    lng: 139.0486,
+    lat: 37.91851634861739,
+    lng: 139.04432801090044,
     description: 'パスポートなしで台湾気分が楽しめる喫茶店。',
     highlight: '台湾旅行をされた方が懐かしんで訪れたり、台湾旅行を予定されている方が来店することも。本場の味が楽しめるお店。',
     address: '新潟市中央区東堀通4番町452',
