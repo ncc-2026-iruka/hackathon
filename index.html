@@ -454,8 +454,191 @@
       cursor: pointer;
     }
 
-    @media (max-width: 980px) {
+    /* ========================================
+       スタンプボード（追加分）
+    ======================================== */
+    .stamp-section {
+      margin-top: 8px;
+      margin-bottom: 28px;
+    }
 
+    .stamp-section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .stamp-section-head h2 {
+      margin: 0;
+    }
+
+    .stamp-board {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px 28px 24px;
+    }
+
+    .stamp-board-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .stamp-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+      gap: 14px;
+    }
+
+    .stamp-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+
+    .stamp-cell:hover {
+      transform: translateY(-2px);
+    }
+
+    .stamp-frame {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      border: 2.5px dashed #d8dce8;
+      background: #f7f8fb;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .stamp-cell:hover .stamp-frame {
+      border-color: #ffc5d8;
+    }
+
+    .stamp-frame.stamped {
+      border: 2.5px solid #16a34a;
+      background: white;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.18);
+    }
+
+    .stamp-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .stamp-frame img.loaded {
+      opacity: 1;
+    }
+
+    /* 未取得のオーバーレイ */
+    .stamp-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      background: rgba(247, 248, 251, 0.82);
+      transition: opacity 0.2s ease;
+    }
+
+    .stamp-frame.stamped .stamp-overlay {
+      display: none;
+    }
+
+    .stamp-overlay-icon {
+      font-size: 22px;
+      opacity: 0.35;
+    }
+
+    /* 取得済みのスタンプ印 */
+    .stamp-ink {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .stamp-frame.stamped .stamp-ink {
+      display: flex;
+    }
+
+    .stamp-ink-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      border: 3px solid rgba(22, 163, 74, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(22, 163, 74, 0.08);
+    }
+
+    .stamp-ink-check {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    /* アニメーション：スタンプ押下 */
+    @keyframes stampPop {
+      0% { transform: scale(1.4); opacity: 0; }
+      60% { transform: scale(0.92); opacity: 1; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .stamp-frame.stamp-anim .stamp-ink {
+      animation: stampPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    }
+
+    .stamp-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.4;
+      max-width: 88px;
+      word-break: break-all;
+    }
+
+    .stamp-area-tag {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* スタンプカウント */
+    .stamp-count-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: linear-gradient(135deg, #ffe2ee, #fff0d6);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    @media (max-width: 980px) {
       .hero,
       .map-layout,
       .spot-list,
@@ -469,6 +652,16 @@
 
       #map {
         height: 460px;
+      }
+
+      .stamp-grid {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+        gap: 10px;
+      }
+
+      .stamp-frame {
+        width: 68px;
+        height: 68px;
       }
     }
   </style>
@@ -576,6 +769,22 @@
         <div class="small">一覧から選んでも地図と詳細が連動します</div>
       </div>
       <div class="spot-list" id="spotList"></div>
+    </section>
+
+    <!-- ========================================
+         スタンプボード（追加）
+    ======================================== -->
+    <section class="stamp-section">
+      <div class="stamp-section-head">
+        <h2>スタンプ帳</h2>
+        <div class="stamp-count-badge">
+          🎟️ <span id="stampBoardCount">0</span> / <span id="stampBoardTotal">19</span> 個取得
+        </div>
+      </div>
+      <div class="stamp-board card">
+        <div class="stamp-board-title">集めたスタンプ — スポットを訪れると押印されます</div>
+        <div class="stamp-grid" id="stampGrid"></div>
+      </div>
     </section>
 
     <div class="footer-note">VS Code + Live Serverで開くと確認しやすい、地図つき古町スタンプラリー試作版</div>
@@ -1046,6 +1255,7 @@
       refreshMarkers();
       renderSpotList();
       renderDetail();
+      renderStampBoard(); // ← スタンプボード更新も追加
     }
 
     function stampSpot(spotId) {
@@ -1060,6 +1270,8 @@
       selectedSpotId = spotId;
       messageBox.textContent = `「${spot.name}」のスタンプをゲット！ ${spot.rewardText}`;
       renderAll();
+      // スタンプボードのセルにアニメーションを当てる
+      animateStampCell(spotId);
     }
 
     function openNavigation(spot) {
@@ -1165,6 +1377,92 @@
       params.delete('scan');
       const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
       history.replaceState({}, '', newUrl);
+    }
+
+    // ========================================
+    // スタンプボード（追加）
+    // ========================================
+
+    function renderStampBoard() {
+      const grid = document.getElementById('stampGrid');
+      const countEl = document.getElementById('stampBoardCount');
+      const totalEl = document.getElementById('stampBoardTotal');
+
+      countEl.textContent = stampedIds.length;
+      totalEl.textContent = spots.length;
+
+      // 初回だけ DOM を構築、以降は状態だけ更新
+      if (grid.children.length === 0) {
+        spots.forEach((spot) => {
+          const cell = document.createElement('div');
+          cell.className = 'stamp-cell';
+          cell.dataset.spotId = spot.id;
+          cell.title = spot.name;
+          cell.addEventListener('click', () => selectSpot(spot.id, true));
+
+          const frame = document.createElement('div');
+          frame.className = 'stamp-frame';
+          frame.id = `stamp-frame-${spot.id}`;
+
+          // 画像
+          const img = document.createElement('img');
+          img.alt = spot.name;
+          img.src = spot.image;
+          img.addEventListener('load', () => img.classList.add('loaded'));
+          img.addEventListener('error', () => {
+            // 画像が読めなかった場合はフォールバック色を表示
+            img.style.display = 'none';
+          });
+
+          // 未取得オーバーレイ
+          const overlay = document.createElement('div');
+          overlay.className = 'stamp-overlay';
+          overlay.innerHTML = `<span class="stamp-overlay-icon">🏮</span>`;
+
+          // 取得済み印
+          const ink = document.createElement('div');
+          ink.className = 'stamp-ink';
+          ink.innerHTML = `<div class="stamp-ink-circle"><span class="stamp-ink-check">✓</span></div>`;
+
+          frame.appendChild(img);
+          frame.appendChild(overlay);
+          frame.appendChild(ink);
+
+          const name = document.createElement('div');
+          name.className = 'stamp-name';
+          name.textContent = spot.name;
+
+          const areaTag = document.createElement('div');
+          areaTag.className = 'stamp-area-tag';
+          areaTag.textContent = spot.area;
+
+          cell.appendChild(frame);
+          cell.appendChild(name);
+          cell.appendChild(areaTag);
+          grid.appendChild(cell);
+        });
+      }
+
+      // 状態を反映（取得済み ↔ 未取得）
+      spots.forEach((spot) => {
+        const frame = document.getElementById(`stamp-frame-${spot.id}`);
+        if (!frame) return;
+        if (stampedIds.includes(spot.id)) {
+          frame.classList.add('stamped');
+        } else {
+          frame.classList.remove('stamped');
+        }
+      });
+    }
+
+    function animateStampCell(spotId) {
+      const frame = document.getElementById(`stamp-frame-${spotId}`);
+      if (!frame) return;
+      frame.classList.remove('stamp-anim');
+      // 強制リフロー
+      void frame.offsetWidth;
+      frame.classList.add('stamp-anim');
+      frame.addEventListener('animationend', () => frame.classList.remove('stamp-anim'), { once: true });
     }
 
     renderAll();
