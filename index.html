@@ -1,15 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>古町マップ付きスタンプラリー</title>
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-    crossorigin=""
-  />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
   <style>
     :root {
       --bg: #fffafc;
@@ -31,7 +28,8 @@
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
@@ -206,7 +204,8 @@
       margin-bottom: 12px;
     }
 
-    .toolbar-left, .toolbar-right {
+    .toolbar-left,
+    .toolbar-right {
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
@@ -407,9 +406,17 @@
       display: inline-block;
     }
 
-    .dot.todo { background: #e75b90; }
-    .dot.done { background: #16a34a; }
-    .dot.goal { background: #f59e0b; }
+    .dot.todo {
+      background: #e75b90;
+    }
+
+    .dot.done {
+      background: #16a34a;
+    }
+
+    .dot.goal {
+      background: #f59e0b;
+    }
 
     .footer-note {
       text-align: center;
@@ -448,6 +455,7 @@
     }
 
     @media (max-width: 980px) {
+
       .hero,
       .map-layout,
       .spot-list,
@@ -465,6 +473,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="page">
     <section class="hero">
@@ -537,9 +546,11 @@
             <div class="status todo" id="detailStatus">未選択</div>
           </div>
           <p id="detailDescription">地図のピンか下の一覧からスポットを選ぶと、ここに見どころや案内が表示されます。</p>
-          <img id="detailImage" class="spot-image" alt="スポット画像" src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80" />
+          <img id="detailImage" class="spot-image" alt="スポット画像"
+            src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80" />
           <div class="meta-list">
-            <div class="meta-item"><strong>見どころ</strong><span id="detailHighlight">古町の魅力を歩きながら体験できるスポットを選んでね。</span></div>
+            <div class="meta-item"><strong>見どころ</strong><span id="detailHighlight">古町の魅力を歩きながら体験できるスポットを選んでね。</span>
+            </div>
             <div class="meta-item"><strong>住所</strong><span id="detailAddress">スポットを選択すると表示されます。</span></div>
             <div class="meta-item"><strong>営業時間</strong><span id="detailHours">スポットを選択すると表示されます。</span></div>
             <div class="meta-item"><strong>現在地からの距離</strong><span id="detailDistance">現在地を取得すると距離を表示します。</span></div>
@@ -569,11 +580,8 @@
     <div class="footer-note">VS Code + Live Serverで開くと確認しやすい、地図つき古町スタンプラリー試作版</div>
   </div>
 
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-    crossorigin=""
-  ></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
     const STORAGE_KEY = 'furumachi_map_stamp_rally_v1';
 
@@ -614,7 +622,7 @@
         address: '新潟市中央区東堀通4番町452',
         hours: '11:00〜19:00',
         image: 'https://niigata-kankou.or.jp/image/rendering/blog_paragraph_column_image/9211/keep/640?v=0ff6af5a0254618a7b50b504c98343ec076ed0d1',
-        rewardText: 'カフェスタンプ'
+        rewardText: '映えスタンプ'
       },
       {
         id: 'hakusan-shrine',
@@ -656,71 +664,137 @@
         rewardText: '完全制覇スタンプ'
       },
       {
-    id: 'tonkatsu-taro',
-    name: 'とんかつ太郎',
-    area: 'グルメ',
-    lat: 37.9202,
-    lng: 139.0428,
-    description: '新潟名物のタレカツ丼で有名な老舗とんかつ店。',
-    highlight: '甘辛いタレが染みたカツは古町グルメの定番。',
-    address: '新潟県新潟市中央区古町通6番町973',
-    hours: '11:30〜14:30 / 17:00〜20:00（目安）',
-    image: 'https://images.unsplash.com/photo-1604908176997-4319c2d5e0c4?auto=format&fit=crop&w=1200&q=80',
-    rewardText: 'タレカツグルメスタンプ'
-    },
-    {
-    id: 'sankichiya-nishibori',
-    name: '三吉屋 西堀本店',
-    area: 'グルメ',
-    lat: 37.9200,
-    lng: 139.0389,
-    description: 'あっさり醤油ラーメンが人気の新潟ラーメンの老舗。',
-    highlight: '透き通ったスープと細麺が特徴の昔ながらの一杯。',
-    address: '新潟県新潟市中央区西堀通5-829',
-    hours: '11:00〜16:00（目安）',
-    image: 'https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format&fit=crop&w=1200&q=80',
-    rewardText: '老舗ラーメンスタンプ'
-    },
-  {
-    id: 'hari-ito',
-    name: 'はり糸',
-    area: '文化',
-    lat: 37.9194,
-    lng: 139.0423,
-    description: '手仕事の温もりを感じられる雑貨や工芸品を扱うお店。',
-    highlight: '一点ものの作品に出会える、落ち着いた雰囲気の空間。',
-    address: '新潟県新潟市中央区古町通5番町618',
-    hours: '10:00〜18:00（目安）',
-    image: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&w=1200&q=80',
-    rewardText: 'クラフト体験スタンプ'
-  },
-  {
-    id: 'niigata-ogawaya',
-    name: '新潟小川屋',
-    area: 'グルメ',
-    lat: 37.9195,
-    lng: 139.0421,
-    description: '鮭の味噌漬けなどで知られる新潟の老舗食品店。',
-    highlight: 'お土産にもぴったりな伝統の味を楽しめる。',
-    address: '新潟県新潟市中央区古町通5番町611',
-    hours: '9:00〜18:00（目安）',
-    image: 'https://images.unsplash.com/photo-1604909053196-2dcb5a0e67a5?auto=format&fit=crop&w=1200&q=80',
-    rewardText: '新潟名産スタンプ'
-  },
-  {
-    id: 'hickory03travelers',
-    name: 'hickory03travelers',
-    area: '現代',
-    lat: 37.9186,
-    lng: 139.0416,
-    description: 'デザイン雑貨やアート作品を扱う人気のショップ。',
-    highlight: 'クリエイティブな空間で新しい発見ができる。',
-    address: '新潟県新潟市中央区古町通3番町556',
-    hours: '11:00〜18:00（目安）',
-    image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80',
-    rewardText: 'アートスタンプ'
-  }
-      
+        id: 'tonkatsu-taro',
+        name: 'とんかつ太郎',
+        area: 'グルメ',
+        lat: 37.9202,
+        lng: 139.0428,
+        description: '新潟名物のタレカツ丼で有名な老舗とんかつ店。',
+        highlight: '甘辛いタレが染みたカツは古町グルメの定番。',
+        address: '新潟県新潟市中央区古町通6番町973',
+        hours: '11:30〜14:30 / 17:00〜20:00（目安）',
+        image: 'https://www.nvcb.or.jp/lsc/upfile/articleDetail/0000/2444/2444_1_m.jpg',
+        rewardText: 'にいがたスタンプ'
+      },
+      {
+        id: 'sankichiya-nishibori',
+        name: '三吉屋 西堀本店',
+        area: 'ラーメン',
+        lat: 37.9200,
+        lng: 139.0389,
+        description: 'あっさり醤油ラーメンが人気の新潟ラーメンの老舗。',
+        highlight: '透き通ったスープと細麺が特徴の昔ながらの一杯。',
+        address: '新潟県新潟市中央区西堀通5-829',
+        hours: '11:00〜16:00（目安）',
+        image: 'https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format&fit=crop&w=1200&q=80',
+        rewardText: 'にいがたスタンプ'
+      },
+      {
+        id: 'hari-ito',
+        name: 'はり糸',
+        area: 'グルメ',
+        lat: 37.9194,
+        lng: 139.0423,
+        description: '1873年（明治6年）創業の新潟・古町の老舗菓子店',
+        highlight: '代々受け継がれる手仕事で焼き上げるしっとりカステラがおすすめ',
+        address: '新潟県新潟市中央区古町通5番町618',
+        hours: '10:00〜18:00（目安）',
+        image: 'https://hariito1873.com/assets/img/mainvisual_pc.jpg',
+        rewardText: 'にいがたスタンプ'
+      },
+      {
+        id: 'niigata-ogawaya',
+        name: '新潟小川屋',
+        area: 'グルメ',
+        lat: 37.9195,
+        lng: 139.0421,
+        description: '鮭の味噌漬けなどで知られる新潟の老舗食品店。',
+        highlight: 'お土産にもぴったりな伝統の味を楽しめる。',
+        address: '新潟県新潟市中央区古町通5番町611',
+        hours: '9:00〜18:00（目安）',
+        image: 'https://images.unsplash.com/photo-1604909053196-2dcb5a0e67a5?auto=format&fit=crop&w=1200&q=80',
+        rewardText: 'にいがたスタンプ'
+      },
+      {
+        id: 'hickory03travelers',
+        name: 'hickory03travelers',
+        area: '雑貨',
+        lat: 37.9186,
+        lng: 139.0416,
+        description: '「日常を楽しもう」をコンセプトに新潟の名品や浮き星などを取りそろえた雑貨店',
+        highlight: 'クリエイティブな空間で新しい発見ができる。',
+        address: '新潟県新潟市中央区古町通3番町556',
+        hours: '11:00〜18:00（目安）',
+        image: 'https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=1200&q=80',
+        rewardText: 'にいがたスタンプ'
+      },
+      {
+        id: 'chamonix-furumachi',
+        name: 'シャモニー 古町店',
+        area: 'カフェ・喫茶店',
+        lat: 37.9196,
+        lng: 139.0420,
+        description: '昔ながらの雰囲気が残る喫茶店で、ゆったりとした時間を楽しめるスポット。',
+        highlight: 'レトロな空間で味わうコーヒーと軽食が魅力。',
+        address: '新潟県新潟市中央区古町通5番町591',
+        hours: '10:00〜18:00（目安）',
+        image: 'http://ful-5.net/wp/wp-content/uploads/2014/04/chamonix_01.jpg',
+        rewardText: 'カフェ巡りスタンプ'
+      },
+      {
+        id: 'kaffa-palm',
+        name: 'Kaffaパルム',
+        area: 'カフェ・喫茶店',
+        lat: 37.9201,
+        lng: 139.0431,
+        description: '新潟市中央区古町で半世紀続く老舗喫茶店。',
+        highlight: 'こだわりのブレンドと静かな時間が魅力。',
+        address: '新潟県新潟市中央区古町通6番町987',
+        hours: '11:00〜19:00（目安）',
+        image: 'https://things-niigata.jp/wp-content/uploads/2025/03/kaffa_04.jpg',
+        rewardText: 'カフェ巡りスタンプ'
+      },
+      {
+        id: 'new-furumachi-cafe',
+        name: '喫茶ニュー古町',
+        area: 'カフェ・喫茶店',
+        lat: 37.9210,
+        lng: 139.0445,
+        description: '古町花街に誕生。夜だけ開くレトロ喫茶。',
+        highlight: '28年間ラウンジとして営業し、大切に使い続けられてきた店舗を喫茶店にリニューアル。',
+        address: '新潟県新潟市中央区東堀通9番町1407-17',
+        hours: '10:00〜17:00（目安）',
+        image: 'https://tjniigata.jp/assets/uploads/2025/10/e0cf4ecde8d902c0ae6846ccf9d2a9f7-760x507.jpg',
+        rewardText: 'カフェ巡りスタンプ'
+      },
+      {
+        id: 'san-nagaya',
+        name: '上古町の百年長屋SAN',
+        area: 'カフェ・喫茶店',
+        lat: 37.9188,
+        lng: 139.0412,
+        description: '築100年の古民家を再活用した 上古町を体験する複合施設。',
+        highlight: '二階の空間では勉強や作業ができる。',
+        address: '新潟県新潟市中央区古町通3番町653',
+        hours: '店舗により異なる',
+        image: 'https://storage.googleapis.com/teamplace-official-bucket/57aFfBblob',
+        rewardText: 'カフェ巡りスタンプ'
+      },
+      {
+        id: 'sugarcoat',
+        name: 'SugarCOAT',
+        area: 'カフェ・喫茶店',
+        lat: 37.9205,
+        lng: 139.0410,
+        description: '様々な種類の紅茶や手作りお菓子が楽しめる。',
+        highlight: '英国・仏国を中心に仕入れをした紅茶と手作りのお菓子をご用意。',
+        address: '新潟市中央区西堀通3-802-3',
+        hours: '11:00〜18:00（目安）',
+        image: 'https://sugarcoat-tea.com/images/logo_sugarcoat.svg',
+        rewardText: 'カフェ巡りスタンプ'
+      }
+
+
 
 
 
@@ -1058,4 +1132,5 @@
     checkQueryScan();
   </script>
 </body>
+
 </html>
