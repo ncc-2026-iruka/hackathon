@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>古町マップ付きスタンプラリー</title>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <style>
+    :root {
+      --bg: #fffafc;
+      --bg2: #fffdf7;
+      --card: rgba(255, 255, 255, 0.95);
+      --text: #233143;
+      --muted: #667085;
+      --primary: #e75b90;
+      --primary-dark: #c63f72;
+      --line: #e6e8ee;
+      --soft: #f7f8fb;
+      --ok: #16a34a;
+      --warn: #f59e0b;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg), var(--bg2));
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .page {
+      width: min(1240px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 16px 0 28px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.45fr 0.85fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      backdrop-filter: blur(8px);
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 12px;
+      background: #ffe2ee;
+      color: var(--primary-dark);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.15;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.8;
+    }
+
+    .lead {
+      color: var(--muted);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      padding: 7px 12px;
+      background: var(--soft);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #445268;
+    }
+
+    .progress-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      height: 14px;
+      background: #eceef3;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--primary), #ffb04c);
+      transition: width 0.25s ease;
+    }
+
+    .notice {
+      margin-top: 14px;
+      padding: 15px 16px;
+      border-radius: 18px;
+      background: var(--soft);
+      color: #445268;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .controls {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 16px;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn.sub {
+      background: #eef2f7;
+      color: var(--text);
+    }
+
+    .btn.sub:hover {
+      background: #dfe6ee;
+    }
+
+    .map-layout {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 16px;
+      margin-bottom: 16px;
+      align-items: start;
+    }
+
+    .map-card {
+      padding: 16px;
+    }
+
+    .map-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .toolbar-left, .toolbar-right {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    select {
+      appearance: none;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 11px 14px;
+      background: white;
+      font-size: 14px;
+      color: var(--text);
+      min-width: 170px;
+    }
+
+    #map {
+      width: 100%;
+      height: 600px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: sticky;
+      top: 16px;
+    }
+
+    .detail-title-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 10px;
+    }
+
+    .area {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .status {
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .status.done {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .status.todo {
+      background: #eef2f7;
+      color: #475467;
+    }
+
+    .spot-image {
+      margin: 14px 0;
+      width: 100%;
+      height: 180px;
+      border-radius: 20px;
+      object-fit: cover;
+      background: #f3f4f6;
+      border: 1px solid var(--line);
+    }
+
+    .meta-list {
+      display: grid;
+      gap: 10px;
+      margin: 14px 0;
+    }
+
+    .meta-item {
+      background: var(--soft);
+      border-radius: 16px;
+      padding: 12px 14px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #445268;
+    }
+
+    .meta-item strong {
+      display: block;
+      margin-bottom: 2px;
+      color: var(--text);
+    }
+
+    .action-grid {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .message {
+      font-size: 14px;
+      line-height: 1.8;
+      background: var(--soft);
+      border-radius: 18px;
+      padding: 14px 16px;
+      color: #445268;
+    }
+
+    .list-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .small {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .spot-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .spot-item {
+      background: var(--card);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      transition: 0.2s ease;
+      border: 2px solid transparent;
+    }
+
+    .spot-item:hover {
+      transform: translateY(-2px);
+    }
+
+    .spot-item.active {
+      border-color: #ffc5d8;
+    }
+
+    .spot-item p {
+      font-size: 14px;
+      color: #475467;
+      margin-top: 10px;
+      min-height: 78px;
+    }
+
+    .spot-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .reward {
+      border-radius: 22px;
+      padding: 18px;
+      background: var(--soft);
+      font-size: 14px;
+      line-height: 1.8;
+      color: #445268;
+    }
+
+    .reward.unlocked {
+      background: linear-gradient(135deg, #ffe8a0, #ffd6e5);
+      color: #382d1d;
+    }
+
+    .legend {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 10px;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .dot.todo { background: #e75b90; }
+    .dot.done { background: #16a34a; }
+    .dot.goal { background: #f59e0b; }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 6px;
+    }
+
+    .leaflet-popup-content-wrapper {
+      border-radius: 18px;
+    }
+
+    .popup-title {
+      font-weight: 700;
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+
+    .popup-text {
+      font-size: 13px;
+      color: #475467;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .popup-btn {
+      appearance: none;
+      border: none;
+      background: var(--primary);
+      color: white;
+      border-radius: 12px;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .map-layout,
+      .spot-list,
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        position: static;
+      }
+
+      #map {
+        height: 460px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div class="card">
+        <div class="label">MAP STYLE STAMP RALLY</div>
+        <h1>古町マップ付きデジタルスタンプラリー</h1>
+        <p class="lead">
+          地図を見ながらスポットの概要を確認して、「ここへ向かう」で現地へ移動し、到着したらスタンプを集める形の試作版です。
+          ChargeSPOTみたいに、まず地図から探して向かう流れを意識した作りにしてあります。
+        </p>
+        <div class="chips">
+          <span class="chip">HTML</span>
+          <span class="chip">CSS</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Leaflet地図</span>
+          <span class="chip">現在地取得</span>
+          <span class="chip">ローカル保存</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>達成状況</h2>
+        <div class="progress-head">
+          <span>進捗</span>
+          <span id="progressText">0 / 6</span>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="notice" id="achievementMessage">まずは地図から行きたいスポットを探そう。</div>
+        <div class="controls">
+          <button class="btn" id="locateButton">現在地を表示</button>
+          <button class="btn sub" id="resetButton">リセット</button>
+        </div>
+        <div class="legend">
+          <span><i class="dot todo"></i> 未取得</span>
+          <span><i class="dot done"></i> 取得済み</span>
+          <span><i class="dot goal"></i> ゴール</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="map-layout">
+      <div class="card map-card">
+        <div class="map-toolbar">
+          <div class="toolbar-left">
+            <select id="areaFilter">
+              <option value="all">すべてのエリア</option>
+              <option value="スタート">スタート</option>
+              <option value="歴史">歴史</option>
+              <option value="現代">現代</option>
+              <option value="文化">文化</option>
+              <option value="自然">自然</option>
+              <option value="ゴール">ゴール</option>
+            </select>
+            <button class="btn sub" id="fitButton">全スポット表示</button>
+          </div>
+          <div class="toolbar-right small">ピンを押すと右側に概要が表示されます</div>
+        </div>
+        <div id="map"></div>
+      </div>
+
+      <div class="side-panel">
+        <div class="card">
+          <div class="detail-title-row">
+            <div>
+              <div class="area" id="detailArea">スポットを選択</div>
+              <h3 id="detailName">古町スポット詳細</h3>
+            </div>
+            <div class="status todo" id="detailStatus">未選択</div>
+          </div>
+          <p id="detailDescription">地図のピンか下の一覧からスポットを選ぶと、ここに見どころや案内が表示されます。</p>
+          <img id="detailImage" class="spot-image" alt="スポット画像" src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80" />
+          <div class="meta-list">
+            <div class="meta-item"><strong>見どころ</strong><span id="detailHighlight">古町の魅力を歩きながら体験できるスポットを選んでね。</span></div>
+            <div class="meta-item"><strong>住所</strong><span id="detailAddress">スポットを選択すると表示されます。</span></div>
+            <div class="meta-item"><strong>営業時間</strong><span id="detailHours">スポットを選択すると表示されます。</span></div>
+            <div class="meta-item"><strong>現在地からの距離</strong><span id="detailDistance">現在地を取得すると距離を表示します。</span></div>
+          </div>
+          <div class="action-grid">
+            <button class="btn" id="goButton">ここへ向かう</button>
+            <button class="btn sub" id="stampButton">このスポットでスタンプ取得</button>
+          </div>
+          <div class="message" id="messageBox" style="margin-top: 14px;">地図から気になるスポットを選んでみよう。</div>
+        </div>
+
+        <div class="card">
+          <h2>特典画面</h2>
+          <div class="reward" id="rewardBox">まだロック中です。全スポットを巡ると、ここに特典画面が表示されます。</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="list-head">
+        <h2>スポット一覧</h2>
+        <div class="small">一覧から選んでも地図と詳細が連動します</div>
+      </div>
+      <div class="spot-list" id="spotList"></div>
+    </section>
+
+    <div class="footer-note">VS Code + Live Serverで開くと確認しやすい、地図つき古町スタンプラリー試作版</div>
+  </div>
+
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script>
+    const STORAGE_KEY = 'furumachi_map_stamp_rally_v1';
+
+    const spots = [
+      {
+        id: 'furumachi-rufuru',
+        name: '古町ルフル',
+        area: 'スタート',
+        lat: 37.9199,
+        lng: 139.0425,
+        description: 'スタンプラリーのスタート地点。まずはここで全体の流れを確認して古町めぐりを始めよう。',
+        highlight: '街歩きの起点として使いやすく、古町散策の入口にぴったり。',
+        address: '新潟市中央区古町通7番町1010',
+        hours: '8:30〜22:00（目安）',
+        image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=1200&q=80',
+        rewardText: '冒険のはじまりスタンプ'
+      },
+      {
+        id: 'furumachi-shotengai',
+        name: '古町通商店街',
+        area: '歴史',
+        lat: 37.9193,
+        lng: 139.0438,
+        description: '古町らしい雰囲気を味わえる商店街エリア。老舗や昔ながらの街並みを感じながら歩ける。',
+        highlight: 'レトロ感や歴史を感じられて、古町らしさが強い定番スポット。',
+        address: '新潟市中央区古町通周辺',
+        hours: '店舗により異なる',
+        image: 'https://images.unsplash.com/photo-1526483360412-f4dbaf036963?auto=format&fit=crop&w=1200&q=80',
+        rewardText: 'レトロまち歩きスタンプ'
+      },
+      {
+        id: 'cafe-zone',
+        name: 'カフェゾーン',
+        area: '現代',
+        lat: 37.9184,
+        lng: 139.0447,
+        description: '古町の中でも若者向けの空気を感じやすい、おしゃれなカフェ周辺エリア。',
+        highlight: '映えスポットや休憩地点としても使いやすく、SNS相性も高い。',
+        address: '新潟市中央区古町通周辺カフェエリア',
+        hours: '11:00〜19:00（想定）',
+        image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80',
+        rewardText: '映えカフェスタンプ'
+      },
+      {
+        id: 'hakusan-shrine',
+        name: '白山神社',
+        area: '文化',
+        lat: 37.9147,
+        lng: 139.0368,
+        description: '落ち着いた雰囲気の中で文化と季節を感じられる、新潟を代表する神社スポット。',
+        highlight: '街なか散策に静けさを加えられる、文化系のアクセントになる場所。',
+        address: '新潟市中央区一番堀通町1-1',
+        hours: '終日参拝可',
+        image: 'https://images.unsplash.com/photo-1578469645742-46cae010e5d4?auto=format&fit=crop&w=1200&q=80',
+        rewardText: '願いごとスタンプ'
+      },
+      {
+        id: 'yasuragi-tei',
+        name: 'やすらぎ堤',
+        area: '自然',
+        lat: 37.9180,
+        lng: 139.0505,
+        description: '信濃川沿いを歩きながら景色を楽しめる、古町散策の中で一息つけるスポット。',
+        highlight: '川沿いの開放感があり、ゴール前の気分転換や写真にも向いている。',
+        address: '新潟市中央区信濃川沿い',
+        hours: '終日',
+        image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80',
+        rewardText: '川辺さんぽスタンプ'
+      },
+      {
+        id: 'goal-counter',
+        name: '景品交換所',
+        area: 'ゴール',
+        lat: 37.9190,
+        lng: 139.0429,
+        description: '全スポットを回ったあとに訪れるゴール地点。達成画面の提示で特典と交換する想定。',
+        highlight: 'ラストに達成感を演出する、締めのスポット。',
+        address: '古町ルフル周辺イベントカウンター想定',
+        hours: '10:00〜18:00（想定）',
+        image: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
+        rewardText: '完全制覇スタンプ'
+      }
+    ];
+
+    const progressText = document.getElementById('progressText');
+    const progressBar = document.getElementById('progressBar');
+    const achievementMessage = document.getElementById('achievementMessage');
+    const rewardBox = document.getElementById('rewardBox');
+    const messageBox = document.getElementById('messageBox');
+    const locateButton = document.getElementById('locateButton');
+    const resetButton = document.getElementById('resetButton');
+    const fitButton = document.getElementById('fitButton');
+    const areaFilter = document.getElementById('areaFilter');
+    const spotList = document.getElementById('spotList');
+    const goButton = document.getElementById('goButton');
+    const stampButton = document.getElementById('stampButton');
+
+    const detailArea = document.getElementById('detailArea');
+    const detailName = document.getElementById('detailName');
+    const detailStatus = document.getElementById('detailStatus');
+    const detailDescription = document.getElementById('detailDescription');
+    const detailImage = document.getElementById('detailImage');
+    const detailHighlight = document.getElementById('detailHighlight');
+    const detailAddress = document.getElementById('detailAddress');
+    const detailHours = document.getElementById('detailHours');
+    const detailDistance = document.getElementById('detailDistance');
+
+    let stampedIds = loadStamps();
+    let selectedSpotId = spots[0].id;
+    let userLocation = null;
+    let userMarker = null;
+    const markers = {};
+
+    const map = L.map('map', { zoomControl: true }).setView([37.9187, 139.0435], 15);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    function loadStamps() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+      } catch (error) {
+        return [];
+      }
+    }
+
+    function saveStamps() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(stampedIds));
+    }
+
+    function createIcon(color) {
+      return L.divIcon({
+        className: '',
+        html: `<div style="width:18px;height:18px;border-radius:50%;background:${color};border:3px solid white;box-shadow:0 3px 10px rgba(0,0,0,0.25);"></div>`,
+        iconSize: [18, 18],
+        iconAnchor: [9, 9],
+        popupAnchor: [0, -10]
+      });
+    }
+
+    function markerColorForSpot(spot) {
+      if (spot.area === 'ゴール') return '#f59e0b';
+      return stampedIds.includes(spot.id) ? '#16a34a' : '#e75b90';
+    }
+
+    function refreshMarkers() {
+      Object.values(markers).forEach((marker) => map.removeLayer(marker));
+      Object.keys(markers).forEach((key) => delete markers[key]);
+
+      const filteredSpots = getFilteredSpots();
+
+      filteredSpots.forEach((spot) => {
+        const marker = L.marker([spot.lat, spot.lng], { icon: createIcon(markerColorForSpot(spot)) }).addTo(map);
+        marker.bindPopup(`
+          <div class="popup-title">${spot.name}</div>
+          <div class="popup-text">${spot.description}</div>
+          <button class="popup-btn" onclick="selectSpot('${spot.id}', true)">詳細を見る</button>
+        `);
+        marker.on('click', () => selectSpot(spot.id, false));
+        markers[spot.id] = marker;
+      });
+    }
+
+    function getFilteredSpots() {
+      const value = areaFilter.value;
+      if (value === 'all') return spots;
+      return spots.filter((spot) => spot.area === value);
+    }
+
+    function setMapBounds() {
+      const filtered = getFilteredSpots();
+      const latlngs = filtered.map((spot) => [spot.lat, spot.lng]);
+      if (userLocation) latlngs.push([userLocation.lat, userLocation.lng]);
+      if (latlngs.length > 0) {
+        map.fitBounds(latlngs, { padding: [40, 40] });
+      }
+    }
+
+    function formatDistance(from, to) {
+      const R = 6371000;
+      const toRad = (deg) => (deg * Math.PI) / 180;
+      const dLat = toRad(to.lat - from.lat);
+      const dLng = toRad(to.lng - from.lng);
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRad(from.lat)) * Math.cos(toRad(to.lat)) *
+        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const distance = R * c;
+      if (distance < 1000) return Math.round(distance) + ' m';
+      return (distance / 1000).toFixed(2) + ' km';
+    }
+
+    function renderProgress() {
+      const total = spots.length;
+      const count = stampedIds.length;
+      const percent = Math.round((count / total) * 100);
+      progressText.textContent = `${count} / ${total}`;
+      progressBar.style.width = percent + '%';
+
+      if (count === total) {
+        achievementMessage.textContent = 'おめでとう！全スポット制覇で「古町マスター」達成！';
+        rewardBox.className = 'reward unlocked';
+        rewardBox.innerHTML = '<strong>古町マスター認定！</strong><br>全スタンプ達成！この画面を景品交換所で見せると、特典を受け取れる想定です。';
+      } else {
+        achievementMessage.textContent = 'まずは地図から行きたいスポットを探そう。';
+        rewardBox.className = 'reward';
+        rewardBox.textContent = 'まだロック中です。全スポットを巡ると、ここに特典画面が表示されます。';
+      }
+    }
+
+    function renderSpotList() {
+      const filtered = getFilteredSpots();
+      spotList.innerHTML = '';
+
+      filtered.forEach((spot) => {
+        const done = stampedIds.includes(spot.id);
+        const active = selectedSpotId === spot.id;
+
+        const card = document.createElement('div');
+        card.className = 'spot-item' + (active ? ' active' : '');
+        card.innerHTML = `
+          <div class="detail-title-row">
+            <div>
+              <div class="area">${spot.area}</div>
+              <h3>${spot.name}</h3>
+            </div>
+            <div class="status ${done ? 'done' : 'todo'}">${done ? '取得済み' : '未取得'}</div>
+          </div>
+          <p>${spot.description}</p>
+          <div class="small" style="margin-top: 8px;">${spot.address}</div>
+        `;
+
+        const buttons = document.createElement('div');
+        buttons.className = 'spot-buttons';
+
+        const viewButton = document.createElement('button');
+        viewButton.className = 'btn sub';
+        viewButton.textContent = '詳細';
+        viewButton.addEventListener('click', () => selectSpot(spot.id, true));
+
+        const getButton = document.createElement('button');
+        getButton.className = 'btn';
+        getButton.textContent = done ? '取得済み' : '取得';
+        getButton.disabled = done;
+        if (done) {
+          getButton.style.opacity = '0.6';
+          getButton.style.cursor = 'default';
+        }
+        getButton.addEventListener('click', () => stampSpot(spot.id));
+
+        buttons.appendChild(viewButton);
+        buttons.appendChild(getButton);
+        card.appendChild(buttons);
+        spotList.appendChild(card);
+      });
+    }
+
+    function renderDetail() {
+      const spot = spots.find((item) => item.id === selectedSpotId);
+      if (!spot) return;
+
+      const done = stampedIds.includes(spot.id);
+      detailArea.textContent = spot.area;
+      detailName.textContent = spot.name;
+      detailStatus.textContent = done ? '取得済み' : '未取得';
+      detailStatus.className = 'status ' + (done ? 'done' : 'todo');
+      detailDescription.textContent = spot.description;
+      detailImage.src = spot.image;
+      detailHighlight.textContent = spot.highlight;
+      detailAddress.textContent = spot.address;
+      detailHours.textContent = spot.hours;
+      detailDistance.textContent = userLocation
+        ? formatDistance(userLocation, { lat: spot.lat, lng: spot.lng })
+        : '現在地を取得すると表示します。';
+
+      stampButton.textContent = done ? 'このスポットは取得済み' : 'このスポットでスタンプ取得';
+      stampButton.disabled = done;
+      stampButton.style.opacity = done ? '0.6' : '1';
+      stampButton.style.cursor = done ? 'default' : 'pointer';
+    }
+
+    function renderAll() {
+      renderProgress();
+      refreshMarkers();
+      renderSpotList();
+      renderDetail();
+    }
+
+    function stampSpot(spotId) {
+      const spot = spots.find((item) => item.id === spotId);
+      if (!spot) return;
+      if (stampedIds.includes(spotId)) {
+        messageBox.textContent = `「${spot.name}」は取得済みだよ。`;
+        return;
+      }
+      stampedIds.push(spotId);
+      saveStamps();
+      selectedSpotId = spotId;
+      messageBox.textContent = `「${spot.name}」のスタンプをゲット！ ${spot.rewardText}`;
+      renderAll();
+    }
+
+    function openNavigation(spot) {
+      const url = `https://www.google.com/maps/dir/?api=1&destination=${spot.lat},${spot.lng}`;
+      window.open(url, '_blank');
+    }
+
+    function selectSpot(spotId, panToMarker = true) {
+      selectedSpotId = spotId;
+      renderSpotList();
+      renderDetail();
+      const marker = markers[spotId];
+      const spot = spots.find((item) => item.id === spotId);
+      if (panToMarker && marker) {
+        map.setView([spot.lat, spot.lng], 16);
+        marker.openPopup();
+      }
+      messageBox.textContent = `「${spot.name}」の概要を表示中。向かう場合は「ここへ向かう」を押してね。`;
+    }
+
+    window.selectSpot = selectSpot;
+
+    locateButton.addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        messageBox.textContent = 'このブラウザは現在地取得に対応していないみたい。';
+        return;
+      }
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          if (userMarker) {
+            userMarker.setLatLng([userLocation.lat, userLocation.lng]);
+          } else {
+            userMarker = L.circleMarker([userLocation.lat, userLocation.lng], {
+              radius: 8,
+              color: '#2563eb',
+              fillColor: '#2563eb',
+              fillOpacity: 1
+            }).addTo(map).bindPopup('現在地');
+          }
+
+          map.setView([userLocation.lat, userLocation.lng], 15);
+          renderDetail();
+          messageBox.textContent = '現在地を取得したよ。スポットまでの距離も表示できるようになったよ。';
+        },
+        () => {
+          messageBox.textContent = '現在地を取得できなかったよ。位置情報の許可を確認してみてね。';
+        }
+      );
+    });
+
+    resetButton.addEventListener('click', () => {
+      localStorage.removeItem(STORAGE_KEY);
+      stampedIds = [];
+      messageBox.textContent = 'スタンプをリセットしたよ。最初から遊べる状態に戻ったよ。';
+      renderAll();
+    });
+
+    fitButton.addEventListener('click', () => {
+      setMapBounds();
+    });
+
+    areaFilter.addEventListener('change', () => {
+      const filtered = getFilteredSpots();
+      if (!filtered.some((spot) => spot.id === selectedSpotId) && filtered.length > 0) {
+        selectedSpotId = filtered[0].id;
+      }
+      renderAll();
+      setMapBounds();
+    });
+
+    goButton.addEventListener('click', () => {
+      const spot = spots.find((item) => item.id === selectedSpotId);
+      if (!spot) {
+        messageBox.textContent = '先にスポットを選んでね。';
+        return;
+      }
+      openNavigation(spot);
+      messageBox.textContent = `「${spot.name}」へのルート案内を開いたよ。`;
+    });
+
+    stampButton.addEventListener('click', () => {
+      if (!selectedSpotId) {
+        messageBox.textContent = '先にスポットを選んでね。';
+        return;
+      }
+      stampSpot(selectedSpotId);
+    });
+
+    function checkQueryScan() {
+      const params = new URLSearchParams(window.location.search);
+      const scanId = params.get('scan');
+      if (!scanId) return;
+      const exists = spots.some((spot) => spot.id === scanId);
+      if (!exists) return;
+      selectSpot(scanId, true);
+      stampSpot(scanId);
+      params.delete('scan');
+      const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+      history.replaceState({}, '', newUrl);
+    }
+
+    renderAll();
+    setMapBounds();
+    selectSpot(selectedSpotId, false);
+    checkQueryScan();
+  </script>
+</body>
+</html>
