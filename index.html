@@ -521,16 +521,14 @@
         <div class="map-toolbar">
           <div class="toolbar-left">
             <select id="areaFilter" title="フィルター">
-              <option value="all">すべてのエリア</option>
-              <option value="歴史">歴史</option>
-              <option value="現代">現代</option>
-              <option value="文化">文化</option>
-              <option value="自然">自然</option>
-              <option value="ゴール">ゴール</option>
-              <option value="グルメ">グルメ</option>
+              <option value="all">すべてのスポット</option>
+              <option value="散歩">散歩</option>
+              <option value="新潟グルメ">新潟グルメ</option>
+              <option value="酒">酒</option>
               <option value="ラーメン">ラーメン</option>
               <option value="雑貨">雑貨</option>
               <option value="カフェ・喫茶店">カフェ・喫茶店</option>
+              <option value="ゴール">ゴール</option>
             </select>
             <button class="btn sub" id="fitButton">全スポット表示</button>
           </div>
@@ -592,7 +590,7 @@
       {
         id: 'furumachi-rufuru',
         name: '古町ルフル',
-        area: 'スタート',
+        area: '散歩',
         lat: 37.9199,
         lng: 139.0425,
         description: 'スタンプラリーのスタート地点。まずはここで全体の流れを確認して古町めぐりを始めよう。',
@@ -605,7 +603,7 @@
       {
         id: 'furumachi-shotengai',
         name: '古町通商店街',
-        area: '歴史',
+        area: '散歩',
         lat: 37.9193,
         lng: 139.0438,
         description: '古町らしい雰囲気を味わえる商店街エリア。老舗や昔ながらの街並みを感じながら歩ける。',
@@ -616,22 +614,9 @@
         rewardText: 'レトロまち歩きスタンプ'
       },
       {
-        id: 'kirei',
-        name: '台湾 キレイ 茶芸大使館',
-        area: '現代',
-        lat: 37.9164,
-        lng: 139.0486,
-        description: 'パスポートなしで台湾気分が楽しめる喫茶店。',
-        highlight: '台湾旅行をされた方が懐かしんで訪れたり、台湾旅行を予定されている方が来店することも。本場の味が楽しめるお店。',
-        address: '新潟市中央区東堀通4番町452',
-        hours: '11:00〜19:00',
-        image: 'https://niigata-kankou.or.jp/image/rendering/blog_paragraph_column_image/9211/keep/640?v=0ff6af5a0254618a7b50b504c98343ec076ed0d1',
-        rewardText: '映えスタンプ'
-      },
-      {
         id: 'hakusan-shrine',
         name: '白山神社',
-        area: '文化',
+        area: '散歩',
         lat: 37.9147,
         lng: 139.0368,
         description: '落ち着いた雰囲気の中で文化と季節を感じられる、新潟を代表する神社スポット。',
@@ -644,7 +629,7 @@
       {
         id: 'yasuragi-tei',
         name: 'やすらぎ堤',
-        area: '自然',
+        area: '散歩',
         lat: 37.9180,
         lng: 139.0505,
         description: '信濃川沿いを歩きながら景色を楽しめる、古町散策の中で一息つけるスポット。',
@@ -653,32 +638,6 @@
         hours: '終日',
         image: 'https://niigata-kankou.or.jp/image/rendering/attraction_image/8419/trim.900/3/2?v=0ab03623a8ec74c6c8a8001c24c35367e7e2289d',
         rewardText: '川辺さんぽスタンプ'
-      },
-      {
-        id: 'goal-counter',
-        name: '景品交換所',
-        area: 'ゴール',
-        lat: 37.9190,
-        lng: 139.0429,
-        description: '全スポットを回ったあとに訪れるゴール地点。達成画面の提示で特典と交換する想定。',
-        highlight: 'ラストに達成感を演出する、締めのスポット。',
-        address: '古町ルフル周辺イベントカウンター想定',
-        hours: '10:00〜18:00（想定）',
-        image: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
-        rewardText: '完全制覇スタンプ'
-      },
-      {
-        id: 'tonkatsu-taro',
-        name: 'とんかつ太郎',
-        area: 'グルメ',
-        lat: 37.9202,
-        lng: 139.0428,
-        description: '新潟名物のタレカツ丼で有名な老舗とんかつ店。',
-        highlight: '甘辛いタレが染みたカツは古町グルメの定番。',
-        address: '新潟県新潟市中央区古町通6番町973',
-        hours: '11:30〜14:30 / 17:00〜20:00（目安）',
-        image: 'https://www.nvcb.or.jp/lsc/upfile/articleDetail/0000/2444/2444_1_m.jpg',
-        rewardText: 'にいがたスタンプ'
       },
       {
         id: 'sankichiya-nishibori',
@@ -694,9 +653,22 @@
         rewardText: 'にいがたスタンプ'
       },
       {
+        id: 'tonkatsu-taro',
+        name: 'とんかつ太郎',
+        area: '新潟グルメ',
+        lat: 37.9202,
+        lng: 139.0428,
+        description: '新潟名物のタレカツ丼で有名な老舗とんかつ店。',
+        highlight: '甘辛いタレが染みたカツは古町グルメの定番。',
+        address: '新潟県新潟市中央区古町通6番町973',
+        hours: '11:30〜14:30 / 17:00〜20:00（目安）',
+        image: 'https://www.nvcb.or.jp/lsc/upfile/articleDetail/0000/2444/2444_1_m.jpg',
+        rewardText: 'にいがたスタンプ'
+      },
+      {
         id: 'hari-ito',
         name: 'はり糸',
-        area: 'グルメ',
+        area: '新潟グルメ',
         lat: 37.91992260619637,
         lng: 139.04353316268077,
         description: '1873年（明治6年）創業の新潟・古町の老舗菓子店',
@@ -709,7 +681,7 @@
       {
         id: 'niigata-ogawaya',
         name: '新潟小川屋',
-        area: 'グルメ',
+        area: '新潟グルメ',
         lat: 37.921229709701855, 
         lng: 139.0440194304041,
         description: '鮭の味噌漬けなどで知られる新潟の老舗食品店。',
@@ -718,6 +690,45 @@
         hours: '9:00〜18:00（目安）',
         image: 'https://niigata-furumachi.jp/wp-content/uploads/2013/03/05_001_001.png',
         rewardText: 'にいがたスタンプ'
+      },
+      {
+        id: 'goro-furumati',
+        name: '五郎古町店',
+        area: '酒',
+        lat: 37.924527,
+        lng: 139.045638,
+        description: '地酒の種類が豊富な飲み屋。',
+        highlight: '採れたての鮮度抜群の食材を楽しめる',
+        address: '新潟県新潟市中央区古町通8番町1446',
+        hours: '17:30〜01:00（目安）',
+        image: 'https://tblg.k-img.com/restaurant/images/Rvw/108908/640x640_rect_108908471.jpg',
+        rewardText: '五郎スタンプ'
+      },
+    　{
+        id: 'furumatinene',
+        name: '古町寧々',
+        area: '酒',
+        lat: 37.924723,
+        lng: 139.045284,
+        description: '地酒の飲み比べができる定番店。',
+        highlight: '朝捕れ鮮魚と契約農家の野菜を提供',
+        address: '新潟県新潟市中央区古町通8番町1492',
+        hours: '17:00〜23:00（目安）',
+        image: 'https://tblg.k-img.com/restaurant/images/Rvw/4010/4010963.jpg',
+        rewardText: '寧々スタンプ'
+      },
+    　{
+        id: 'gin',
+        name: '吟',
+        area: '酒',
+        lat: 37.925309,
+        lng: 139.046408,
+        description: '呑み方にこだわる通向けの店',
+        highlight: '酒や地酒の個性を感じて楽しめる',
+        address: '新潟県新潟市中央区古町通7番町1004-2',
+        hours: '17:00〜00:00（目安）',
+        image: 'https://draftbeer.jp/wp-content/uploads/2024/08/PXL_20240805_083501790.jpg',
+        rewardText: '吟スタンプ'
       },
       {
         id: 'hickory03travelers',
@@ -797,45 +808,32 @@
         image: 'https://things-niigata.jp/wp-content/uploads/2020/04/sugercoat_05.jpg',
         rewardText: 'カフェ巡りスタンプ'
       },
-　    {
-        id: 'goro-furumati',
-        name: '五郎古町店',
-        area: 'グルメ',
-        lat: 37.924527,
-        lng: 139.045638,
-        description: '地酒の種類が豊富な飲み屋。',
-        highlight: '採れたての鮮度抜群の食材を楽しめる',
-        address: '新潟県新潟市中央区古町通8番町1446',
-        hours: '17:30〜01:00（目安）',
-        image: 'https://tblg.k-img.com/restaurant/images/Rvw/108908/640x640_rect_108908471.jpg',
-        rewardText: '五郎スタンプ'
+      {
+        id: 'kirei',
+        name: '台湾 キレイ 茶芸大使館',
+        area: 'カフェ・喫茶店',
+        lat: 37.9164,
+        lng: 139.0486,
+        description: 'パスポートなしで台湾気分が楽しめる喫茶店。',
+        highlight: '台湾旅行をされた方が懐かしんで訪れたり、台湾旅行を予定されている方が来店することも。本場の味が楽しめるお店。',
+        address: '新潟市中央区東堀通4番町452',
+        hours: '11:00〜19:00',
+        image: 'https://niigata-kankou.or.jp/image/rendering/blog_paragraph_column_image/9211/keep/640?v=0ff6af5a0254618a7b50b504c98343ec076ed0d1',
+        rewardText: '映えスタンプ'
       },
-    　{
-        id: 'furumatinene',
-        name: '古町寧々',
-        area: 'グルメ',
-        lat: 37.924723,
-        lng: 139.045284,
-        description: '地酒の飲み比べができる定番店。',
-        highlight: '朝捕れ鮮魚と契約農家の野菜を提供',
-        address: '新潟県新潟市中央区古町通8番町1492',
-        hours: '17:00〜23:00（目安）',
-        image: 'https://tblg.k-img.com/restaurant/images/Rvw/4010/4010963.jpg',
-        rewardText: '寧々スタンプ'
+      {
+        id: 'goal-counter',
+        name: '景品交換所',
+        area: 'ゴール',
+        lat: 37.9190,
+        lng: 139.0429,
+        description: '全スポットを回ったあとに訪れるゴール地点。達成画面の提示で特典と交換する想定。',
+        highlight: 'ラストに達成感を演出する、締めのスポット。',
+        address: '古町ルフル周辺イベントカウンター想定',
+        hours: '10:00〜18:00（想定）',
+        image: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
+        rewardText: '完全制覇スタンプ'
       },
-    　{
-        id: 'gin',
-        name: '吟',
-        area: 'グルメ',
-        lat: 37.925309,
-        lng: 139.046408,
-        description: '呑み方にこだわる通向けの店',
-        highlight: '酒や地酒の個性を感じて楽しめる',
-        address: '新潟県新潟市中央区古町通7番町1004-2',
-        hours: '17:00〜00:00（目安）',
-        image: 'https://draftbeer.jp/wp-content/uploads/2024/08/PXL_20240805_083501790.jpg',
-        rewardText: '吟スタンプ'
-      }
 
 
 
