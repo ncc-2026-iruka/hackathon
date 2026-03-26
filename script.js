@@ -762,7 +762,7 @@ function renderStampBoard() {
 
       const overlay = document.createElement('div');
       overlay.className = 'stamp-overlay';
-      overlay.innerHTML = `<span class="stamp-overlay-icon">🏮</span>`;
+      //overlay.innerHTML = `<span class="stamp-overlay-icon">🏮</span>`;
 
       const ink = document.createElement('div');
       ink.className = 'stamp-ink';
@@ -770,7 +770,7 @@ function renderStampBoard() {
 
       frame.appendChild(img);
       frame.appendChild(overlay);
-      frame.appendChild(ink);
+      //frame.appendChild(ink);
 
       const name = document.createElement('div');
       name.className = 'stamp-name';

@@ -516,7 +516,7 @@ select {
 }
 
 .stamp-frame.stamped {
-  border: 2.5px solid #16a34a;
+  border: 2.5px solid #d32d2d;
   background: white;
   box-shadow: 0 4px 14px rgba(22, 163, 74, 0.18);
 }
