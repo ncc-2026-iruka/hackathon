@@ -333,7 +333,7 @@ let userMarker = null;
 const markers = {};
 
 const map = L.map('map', { zoomControl: true }).setView([37.9187, 139.0435], 15);
-
+// Fileを直で開くとRefererとUser-Agent不足でポリシー違反になる
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '&copy; OpenStreetMap contributors'
 }).addTo(map);
