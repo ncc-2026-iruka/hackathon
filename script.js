@@ -11,6 +11,7 @@ const spots = [
     highlight: '街歩きの起点として使いやすく、古町散策の入口にぴったり。',
     address: '新潟市中央区古町通7番町1010',
     hours: '8:30〜22:00（目安）',
+    images:'img/古町ルフレ.png',
     image: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Furumachi_REFURU%2C_NEXT21%2C_Masaya-koji_Avenue_and_Furumachi-dori_Street%2C_Niigata_City%2C_August2023.jpg',
     rewardText: '冒険のはじまりスタンプ',
     keyword: 'ルフル'
@@ -25,6 +26,7 @@ const spots = [
     highlight: 'レトロ感や歴史を感じられて、古町らしさが強い定番スポット。',
     address: '新潟市中央区古町通周辺',
     hours: '店舗により異なる',
+    images:'img/古町通商店街.png',
     image: 'https://niigata-furumachi.jp/wp-content/uploads/2013/02/furu60000.jpg',
     rewardText: 'レトロまち歩きスタンプ',
     keyword: '商店街'
@@ -39,6 +41,7 @@ const spots = [
     highlight: '街なか散策に静けさを加えられる、文化系のアクセントになる場所。',
     address: '新潟市中央区一番堀通町1-1',
     hours: '終日参拝可',
+    images:'img/白山神社.png',
     image: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Hakusan_Shrine_%28Niigata_City%29_Haiden.jpg',
     rewardText: '願いごとスタンプ',
     keyword: '白山'
@@ -53,6 +56,7 @@ const spots = [
     highlight: '川沿いの開放感があり、ゴール前の気分転換や写真にも向いている。',
     address: '新潟市中央区信濃川沿い',
     hours: '終日',
+    images:'img/やすらぎ提.png',
     image: 'https://niigata-kankou.or.jp/image/rendering/attraction_image/8419/trim.900/3/2?v=0ab03623a8ec74c6c8a8001c24c35367e7e2289d',
     rewardText: '川辺さんぽスタンプ',
     keyword: 'やすらぎ'
@@ -67,6 +71,7 @@ const spots = [
     highlight: '透き通ったスープと細麺が特徴の昔ながらの一杯。',
     address: '新潟県新潟市中央区西堀通5-829',
     hours: '11:00〜16:00（目安）',
+    images:'img/三吉屋.png',
     image: 'https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format&fit=crop&w=1200&q=80',
     rewardText: 'にいがたスタンプ',
     keyword: '三吉屋'
@@ -81,6 +86,7 @@ const spots = [
     highlight: '豊富でお得なトッピングで自分好みの1杯に。',
     address: '新潟県新潟市中央区古町通7番町951-5',
     hours: '11:00-14:00 / 17:00-20:00',
+    images:'img/紬麦.png',
     image: 'https://things-niigata.jp/wp-content/uploads/2025/03/tsumugi_06.jpg',
     rewardText: 'にいがたスタンプ',
     keyword: '紬麦'
@@ -95,6 +101,7 @@ const spots = [
     highlight: '甘辛いタレが染みたカツは古町グルメの定番。',
     address: '新潟県新潟市中央区古町通6番町973',
     hours: '11:30〜14:30 / 17:00〜20:00（目安）',
+    images:'img/とんかつ太郎.png',
     image: 'https://www.nvcb.or.jp/lsc/upfile/articleDetail/0000/2444/2444_1_m.jpg',
     rewardText: 'にいがたスタンプ',
     keyword: 'タレカツ'
@@ -109,6 +116,7 @@ const spots = [
     highlight: '代々受け継がれる手仕事で焼き上げるしっとりカステラがおすすめ',
     address: '新潟県新潟市中央区古町通5番町618',
     hours: '10:00〜18:00（目安）',
+    images:'img/はり糸.png',
     image: 'https://hariito1873.com/assets/img/mainvisual_pc.jpg',
     rewardText: 'にいがたスタンプ',
     keyword: 'カステラ'
@@ -123,6 +131,7 @@ const spots = [
     highlight: 'お土産にもぴったりな伝統の味を楽しめる。',
     address: '新潟県新潟市中央区古町通5番町611',
     hours: '9:00〜18:00（目安）',
+    images:'img/小川屋.png',
     image: 'https://niigata-furumachi.jp/wp-content/uploads/2013/03/05_001_001.png',
     rewardText: 'にいがたスタンプ',
     keyword: '小川屋'
@@ -137,6 +146,7 @@ const spots = [
     highlight: '採れたての鮮度抜群の食材を楽しめる',
     address: '新潟県新潟市中央区古町通8番町1446',
     hours: '17:30〜01:00（目安）',
+    images:'img/五郎.png',
     image: 'https://tblg.k-img.com/restaurant/images/Rvw/108908/640x640_rect_108908471.jpg',
     rewardText: '五郎スタンプ',
     keyword: '五郎'
@@ -151,6 +161,7 @@ const spots = [
     highlight: '朝捕れ鮮魚と契約農家の野菜を提供',
     address: '新潟県新潟市中央区古町通8番町1492',
     hours: '17:00〜23:00（目安）',
+    images:'img/寧々.png',
     image: 'https://tblg.k-img.com/restaurant/images/Rvw/4010/4010963.jpg',
     rewardText: '寧々スタンプ',
     keyword: '寧々'
@@ -165,13 +176,14 @@ const spots = [
     highlight: '酒や地酒の個性を感じて楽しめる',
     address: '新潟県新潟市中央区古町通7番町1004-2',
     hours: '17:00〜00:00（目安）',
+    images:'img/吟.png',
     image: 'https://draftbeer.jp/wp-content/uploads/2024/08/PXL_20240805_083501790.jpg',
     rewardText: '吟スタンプ',
     keyword: '地酒'
   },
   {
     id: 'hickory03travelers',
-    name: 'hickory03travelers',
+    name: 'hickory03toravelers',
     area: '雑貨',
     lat: 37.91744836138854,
     lng: 139.04189530357252,
@@ -179,6 +191,7 @@ const spots = [
     highlight: 'クリエイティブな空間で新しい発見ができる。',
     address: '新潟県新潟市中央区古町通3番町556',
     hours: '11:00〜18:00（目安）',
+    images:'img/hickory03toravelers.png',
     image: 'https://arekore000.com/wp/wp-content/themes/arekore/images/topShop_img_h3.jpg',
     rewardText: 'にいがたスタンプ',
     keyword: '浮き星'
@@ -193,6 +206,7 @@ const spots = [
     highlight: 'レトロな空間で味わうコーヒーと軽食が魅力。',
     address: '新潟県新潟市中央区古町通5番町591',
     hours: '10:00〜18:00（目安）',
+    images:'img/シャモニー.png',
     image: 'http://ful-5.net/wp/wp-content/uploads/2014/04/chamonix_01.jpg',
     rewardText: 'カフェ巡りスタンプ',
     keyword: 'シャモニー'
@@ -207,6 +221,7 @@ const spots = [
     highlight: 'こだわりのブレンドと静かな時間が魅力。',
     address: '新潟県新潟市中央区古町通6番町987',
     hours: '11:00〜19:00（目安）',
+    images:'img/kaffaパルム.png',
     image: 'https://things-niigata.jp/wp-content/uploads/2025/03/kaffa_04.jpg',
     rewardText: 'カフェ巡りスタンプ',
     keyword: 'パルム'
@@ -221,6 +236,7 @@ const spots = [
     highlight: '28年間ラウンジとして営業し、大切に使い続けられてきた店舗を喫茶店にリニューアル。',
     address: '新潟県新潟市中央区東堀通9番町1407-17',
     hours: '10:00〜17:00（目安）',
+    images:'img/ニュー古町.png',
     image: 'https://tjniigata.jp/assets/uploads/2025/10/e0cf4ecde8d902c0ae6846ccf9d2a9f7-760x507.jpg',
     rewardText: 'カフェ巡りスタンプ',
     keyword: 'ニュー古町'
@@ -235,6 +251,7 @@ const spots = [
     highlight: '二階の空間では勉強や作業ができる。',
     address: '新潟県新潟市中央区古町通3番町653',
     hours: '店舗により異なる',
+    images:'img/SAN.png',
     image: 'https://storage.googleapis.com/teamplace-official-bucket/57aFfBblob',
     rewardText: 'カフェ巡りスタンプ',
     keyword: '百年長屋'
@@ -249,6 +266,7 @@ const spots = [
     highlight: '英国・仏国を中心に仕入れをした紅茶と手作りのお菓子をご用意。',
     address: '新潟市中央区西堀通3-802-3',
     hours: '11:00〜18:00（目安）',
+    images:'img/SuggarCOAT.png',
     image: 'https://things-niigata.jp/wp-content/uploads/2020/04/sugercoat_05.jpg',
     rewardText: 'カフェ巡りスタンプ',
     keyword: '紅茶'
@@ -263,6 +281,7 @@ const spots = [
     highlight: '台湾旅行をされた方が懐かしんで訪れたり、台湾旅行を予定されている方が来店することも。本場の味が楽しめるお店。',
     address: '新潟市中央区東堀通4番町452',
     hours: '11:00〜19:00',
+    images:'img/茶会大使館.png',
     image: 'https://niigata-kankou.or.jp/image/rendering/blog_paragraph_column_image/9211/keep/640?v=0ff6af5a0254618a7b50b504c98343ec076ed0d1',
     rewardText: '映えスタンプ',
     keyword: '台湾'
@@ -277,6 +296,7 @@ const spots = [
     highlight: 'ラストに達成感を演出する、締めのスポット。',
     address: '古町ルフル周辺イベントカウンター想定',
     hours: '10:00〜18:00（想定）',
+    images:'img/景品交換所.png',
     image: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
     rewardText: '完全制覇スタンプ',
     keyword: '完全制覇'
@@ -734,7 +754,7 @@ function renderStampBoard() {
 
       const img = document.createElement('img');
       img.alt = spot.name;
-      img.src = spot.image;
+      img.src = spot.images;
       img.addEventListener('load', () => img.classList.add('loaded'));
       img.addEventListener('error', () => {
         img.style.display = 'none';
