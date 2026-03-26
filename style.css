@@ -57,7 +57,6 @@ body {
   align-items: center;
   gap: 8px;
   padding: 7px 12px;
-  background: #ffe2ee;
   color: var(--primary-dark);
   border-radius: 999px;
   font-size: 12px;
@@ -343,7 +342,7 @@ select {
 }
 
 .spot-item.active {
-  border-color: #ffc5d8;
+  border-color: #ec6d51;
 }
 
 .spot-item p {
@@ -370,7 +369,7 @@ select {
 }
 
 .reward.unlocked {
-  background: linear-gradient(135deg, #ffe8a0, #ffd6e5);
+  background: linear-gradient(135deg, #ffe8a0, #ec6d51);
   color: #382d1d;
 }
 
@@ -513,7 +512,7 @@ select {
 }
 
 .stamp-cell:hover .stamp-frame {
-  border-color: #ffc5d8;
+  border-color: #ec6d51;
 }
 
 .stamp-frame.stamped {
