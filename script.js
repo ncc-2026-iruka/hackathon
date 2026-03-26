@@ -12,7 +12,8 @@ const spots = [
     address: '新潟市中央区古町通7番町1010',
     hours: '8:30〜22:00（目安）',
     image: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Furumachi_REFURU%2C_NEXT21%2C_Masaya-koji_Avenue_and_Furumachi-dori_Street%2C_Niigata_City%2C_August2023.jpg',
-    rewardText: '冒険のはじまりスタンプ'
+    rewardText: '冒険のはじまりスタンプ',
+    keyword: 'ルフル'
   },
   {
     id: 'furumachi-shotengai',
@@ -25,7 +26,8 @@ const spots = [
     address: '新潟市中央区古町通周辺',
     hours: '店舗により異なる',
     image: 'https://niigata-furumachi.jp/wp-content/uploads/2013/02/furu60000.jpg',
-    rewardText: 'レトロまち歩きスタンプ'
+    rewardText: 'レトロまち歩きスタンプ',
+    keyword: '商店街'
   },
   {
     id: 'hakusan-shrine',
@@ -38,7 +40,8 @@ const spots = [
     address: '新潟市中央区一番堀通町1-1',
     hours: '終日参拝可',
     image: 'https://upload.wikimedia.org/wikipedia/commons/8/87/Hakusan_Shrine_%28Niigata_City%29_Haiden.jpg',
-    rewardText: '願いごとスタンプ'
+    rewardText: '願いごとスタンプ',
+    keyword: '白山'
   },
   {
     id: 'yasuragi-tei',
@@ -51,7 +54,8 @@ const spots = [
     address: '新潟市中央区信濃川沿い',
     hours: '終日',
     image: 'https://niigata-kankou.or.jp/image/rendering/attraction_image/8419/trim.900/3/2?v=0ab03623a8ec74c6c8a8001c24c35367e7e2289d',
-    rewardText: '川辺さんぽスタンプ'
+    rewardText: '川辺さんぽスタンプ',
+    keyword: 'やすらぎ'
   },
   {
     id: 'sankichiya-nishibori',
@@ -64,7 +68,8 @@ const spots = [
     address: '新潟県新潟市中央区西堀通5-829',
     hours: '11:00〜16:00（目安）',
     image: 'https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format&fit=crop&w=1200&q=80',
-    rewardText: 'にいがたスタンプ'
+    rewardText: 'にいがたスタンプ',
+    keyword: '三吉屋'
   },
   {
     id: 'ramen-tsumugi',
@@ -77,7 +82,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通7番町951-5',
     hours: '11:00-14:00 / 17:00-20:00',
     image: 'https://things-niigata.jp/wp-content/uploads/2025/03/tsumugi_06.jpg',
-    rewardText: 'にいがたスタンプ'
+    rewardText: 'にいがたスタンプ',
+    keyword: '紬麦'
   },
   {
     id: 'tonkatsu-taro',
@@ -90,7 +96,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通6番町973',
     hours: '11:30〜14:30 / 17:00〜20:00（目安）',
     image: 'https://www.nvcb.or.jp/lsc/upfile/articleDetail/0000/2444/2444_1_m.jpg',
-    rewardText: 'にいがたスタンプ'
+    rewardText: 'にいがたスタンプ',
+    keyword: 'タレカツ'
   },
   {
     id: 'hari-ito',
@@ -103,7 +110,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通5番町618',
     hours: '10:00〜18:00（目安）',
     image: 'https://hariito1873.com/assets/img/mainvisual_pc.jpg',
-    rewardText: 'にいがたスタンプ'
+    rewardText: 'にいがたスタンプ',
+    keyword: 'カステラ'
   },
   {
     id: 'niigata-ogawaya',
@@ -116,7 +124,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通5番町611',
     hours: '9:00〜18:00（目安）',
     image: 'https://niigata-furumachi.jp/wp-content/uploads/2013/03/05_001_001.png',
-    rewardText: 'にいがたスタンプ'
+    rewardText: 'にいがたスタンプ',
+    keyword: '小川屋'
   },
   {
     id: 'goro-furumati',
@@ -129,7 +138,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通8番町1446',
     hours: '17:30〜01:00（目安）',
     image: 'https://tblg.k-img.com/restaurant/images/Rvw/108908/640x640_rect_108908471.jpg',
-    rewardText: '五郎スタンプ'
+    rewardText: '五郎スタンプ',
+    keyword: '五郎'
   },
   {
     id: 'furumatinene',
@@ -142,7 +152,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通8番町1492',
     hours: '17:00〜23:00（目安）',
     image: 'https://tblg.k-img.com/restaurant/images/Rvw/4010/4010963.jpg',
-    rewardText: '寧々スタンプ'
+    rewardText: '寧々スタンプ',
+    keyword: '寧々'
   },
   {
     id: 'gin',
@@ -155,7 +166,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通7番町1004-2',
     hours: '17:00〜00:00（目安）',
     image: 'https://draftbeer.jp/wp-content/uploads/2024/08/PXL_20240805_083501790.jpg',
-    rewardText: '吟スタンプ'
+    rewardText: '吟スタンプ',
+    keyword: '地酒'
   },
   {
     id: 'hickory03travelers',
@@ -168,7 +180,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通3番町556',
     hours: '11:00〜18:00（目安）',
     image: 'https://arekore000.com/wp/wp-content/themes/arekore/images/topShop_img_h3.jpg',
-    rewardText: 'にいがたスタンプ'
+    rewardText: 'にいがたスタンプ',
+    keyword: '浮き星'
   },
   {
     id: 'chamonix-furumachi',
@@ -181,7 +194,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通5番町591',
     hours: '10:00〜18:00（目安）',
     image: 'http://ful-5.net/wp/wp-content/uploads/2014/04/chamonix_01.jpg',
-    rewardText: 'カフェ巡りスタンプ'
+    rewardText: 'カフェ巡りスタンプ',
+    keyword: 'シャモニー'
   },
   {
     id: 'kaffa-palm',
@@ -194,7 +208,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通6番町987',
     hours: '11:00〜19:00（目安）',
     image: 'https://things-niigata.jp/wp-content/uploads/2025/03/kaffa_04.jpg',
-    rewardText: 'カフェ巡りスタンプ'
+    rewardText: 'カフェ巡りスタンプ',
+    keyword: 'パルム'
   },
   {
     id: 'new-furumachi-cafe',
@@ -207,7 +222,8 @@ const spots = [
     address: '新潟県新潟市中央区東堀通9番町1407-17',
     hours: '10:00〜17:00（目安）',
     image: 'https://tjniigata.jp/assets/uploads/2025/10/e0cf4ecde8d902c0ae6846ccf9d2a9f7-760x507.jpg',
-    rewardText: 'カフェ巡りスタンプ'
+    rewardText: 'カフェ巡りスタンプ',
+    keyword: 'ニュー古町'
   },
   {
     id: 'san-nagaya',
@@ -220,7 +236,8 @@ const spots = [
     address: '新潟県新潟市中央区古町通3番町653',
     hours: '店舗により異なる',
     image: 'https://storage.googleapis.com/teamplace-official-bucket/57aFfBblob',
-    rewardText: 'カフェ巡りスタンプ'
+    rewardText: 'カフェ巡りスタンプ',
+    keyword: '百年長屋'
   },
   {
     id: 'sugarcoat',
@@ -233,7 +250,8 @@ const spots = [
     address: '新潟市中央区西堀通3-802-3',
     hours: '11:00〜18:00（目安）',
     image: 'https://things-niigata.jp/wp-content/uploads/2020/04/sugercoat_05.jpg',
-    rewardText: 'カフェ巡りスタンプ'
+    rewardText: 'カフェ巡りスタンプ',
+    keyword: '紅茶'
   },
   {
     id: 'kirei',
@@ -246,7 +264,8 @@ const spots = [
     address: '新潟市中央区東堀通4番町452',
     hours: '11:00〜19:00',
     image: 'https://niigata-kankou.or.jp/image/rendering/blog_paragraph_column_image/9211/keep/640?v=0ff6af5a0254618a7b50b504c98343ec076ed0d1',
-    rewardText: '映えスタンプ'
+    rewardText: '映えスタンプ',
+    keyword: '台湾'
   },
   {
     id: 'goal-counter',
@@ -259,7 +278,8 @@ const spots = [
     address: '古町ルフル周辺イベントカウンター想定',
     hours: '10:00〜18:00（想定）',
     image: 'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80',
-    rewardText: '完全制覇スタンプ'
+    rewardText: '完全制覇スタンプ',
+    keyword: '完全制覇'
   }
 ];
 
@@ -489,12 +509,90 @@ function stampSpot(spotId) {
     return;
   }
 
-  stampedIds.push(spotId);
+  openKeywordModal(spot);
+}
+
+function confirmStamp(spot) {
+  stampedIds.push(spot.id);
   saveStamps();
-  selectedSpotId = spotId;
+  selectedSpotId = spot.id;
   messageBox.textContent = `「${spot.name}」のスタンプをゲット！ ${spot.rewardText}`;
   renderAll();
-  animateStampCell(spotId);
+  animateStampCell(spot.id);
+}
+
+function openKeywordModal(spot) {
+  const existing = document.getElementById('keyword-modal-overlay');
+  if (existing) existing.remove();
+
+  const overlay = document.createElement('div');
+  overlay.id = 'keyword-modal-overlay';
+  overlay.innerHTML = `
+    <div class="kw-modal">
+      <div class="kw-modal-header">
+        <div class="kw-spot-area">${spot.area}</div>
+        <h3 class="kw-spot-name">${spot.name}</h3>
+        <p class="kw-description">このスポットで受け取ったキーワードを入力してスタンプをゲットしよう！</p>
+      </div>
+      <div class="kw-input-wrap">
+        <input
+          id="kw-input"
+          class="kw-input"
+          type="text"
+          placeholder="キーワードを入力..."
+          autocomplete="off"
+        />
+        <div class="kw-hint" id="kw-hint"></div>
+      </div>
+      <div class="kw-actions">
+        <button class="btn" id="kw-submit">スタンプを取得する</button>
+        <button class="btn sub" id="kw-cancel">キャンセル</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(overlay);
+
+  const input = document.getElementById('kw-input');
+  const hint = document.getElementById('kw-hint');
+  const submitBtn = document.getElementById('kw-submit');
+  const cancelBtn = document.getElementById('kw-cancel');
+
+  setTimeout(() => input.focus(), 50);
+
+  function trySubmit() {
+    const value = input.value.trim();
+    if (!value) {
+      hint.textContent = 'キーワードを入力してね。';
+      hint.className = 'kw-hint error';
+      return;
+    }
+
+    // 大文字小文字・全半角を統一して比較
+    const normalize = (s) => s.toLowerCase().replace(/[Ａ-Ｚａ-ｚ０-９]/g, (c) =>
+      String.fromCharCode(c.charCodeAt(0) - 0xFEE0));
+
+    if (normalize(value) === normalize(spot.keyword)) {
+      hint.textContent = '正解！スタンプをゲット！🎉';
+      hint.className = 'kw-hint success';
+      submitBtn.disabled = true;
+      setTimeout(() => {
+        overlay.remove();
+        confirmStamp(spot);
+      }, 700);
+    } else {
+      hint.textContent = 'キーワードが違うよ。もう一度試してみて。';
+      hint.className = 'kw-hint error';
+      input.classList.add('shake');
+      input.addEventListener('animationend', () => input.classList.remove('shake'), { once: true });
+      input.select();
+    }
+  }
+
+  submitBtn.addEventListener('click', trySubmit);
+  cancelBtn.addEventListener('click', () => overlay.remove());
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+  input.addEventListener('keydown', (e) => { if (e.key === 'Enter') trySubmit(); });
 }
 
 function openNavigation(spot) {

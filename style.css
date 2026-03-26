@@ -661,3 +661,119 @@ select {
     height: 68px;
   }
 }
+/* ========================================
+   キーワード入力モーダル
+======================================== */
+#keyword-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 20, 40, 0.55);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+  animation: kwFadeIn 0.18s ease;
+}
+
+@keyframes kwFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.kw-modal {
+  background: var(--card);
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+  padding: 32px 28px 28px;
+  width: min(460px, 100%);
+  animation: kwSlideUp 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes kwSlideUp {
+  from { transform: translateY(28px); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+.kw-modal-header {
+  margin-bottom: 22px;
+}
+
+.kw-spot-area {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.kw-spot-name {
+  margin: 0 0 10px;
+  font-size: 22px;
+  color: var(--text);
+}
+
+.kw-description {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.kw-input-wrap {
+  margin-bottom: 18px;
+}
+
+.kw-input {
+  width: 100%;
+  border: 2px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 18px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--soft);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.kw-input:focus {
+  border-color: var(--primary);
+  background: white;
+}
+
+.kw-hint {
+  min-height: 22px;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  padding-left: 4px;
+}
+
+.kw-hint.error {
+  color: #dc2626;
+}
+
+.kw-hint.success {
+  color: var(--ok);
+}
+
+.kw-actions {
+  display: grid;
+  gap: 10px;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%       { transform: translateX(-8px); }
+  40%       { transform: translateX(8px); }
+  60%       { transform: translateX(-6px); }
+  80%       { transform: translateX(6px); }
+}
+
+.kw-input.shake {
+  animation: shake 0.35s ease;
+  border-color: #dc2626;
+}
