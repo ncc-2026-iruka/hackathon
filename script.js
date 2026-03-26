@@ -809,6 +809,23 @@ function animateStampCell(spotId) {
   frame.addEventListener('animationend', () => frame.classList.remove('stamp-anim'), { once: true });
 }
 
+
+
+document.addEventListener('click', function(e) {
+  if (
+    (e.target.classList.contains('btn') && e.target.classList.contains('sub') && e.target.textContent === '詳細') ||
+    (e.target.classList.contains('popup-btn') && e.target.textContent === '詳細を見る')
+  ) {
+    setTimeout(function() {
+      const sidePanel = document.querySelector('.side-panel');
+      if (sidePanel) {
+        sidePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 50);
+  }
+});
+
+
 renderAll();
 setMapBounds();
 selectSpot(selectedSpotId, false);
