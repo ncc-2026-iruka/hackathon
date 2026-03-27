@@ -1,11 +1,24 @@
 # 古町印帳 🐬
 
+![古町印帳](img/thumbnail.png)
+
 ## FURUMACHI DIGITAL STAMP RALLY
 
 新潟・古町エリアを歩きながらスタンプを集めるデジタルスタンプラリーアプリです。
 地図でスポットを確認し、現地でキーワードを入力してスタンプをゲットしましょう！
 
 > 新潟コンピュータ専門学校 (NCC) ハッカソン — 🐬 イルカチーム
+
+---
+
+## 目次
+
+- [デモを開く](#デモを開く)
+- [使い方](#使い方)
+- [スポット一覧 & キーワード](#スポット一覧--キーワード)
+- [機能一覧](#機能一覧)
+- [技術スタック](#技術スタック)
+- [ファイル構成](#ファイル構成)
 
 ---
 
@@ -114,13 +127,13 @@
 
 ## 機能一覧
 
-- **インタラクティブ地図** — OpenStreetMap + Leaflet.js によるピン表示
+- **インタラクティブ地図** — [OpenStreetMap](https://www.openstreetmap.org/) + [Leaflet.js](https://leafletjs.com/) によるピン表示
 - **カテゴリフィルター** — ジャンル別にスポットを絞り込み
-- **現在地取得** — GPS で自分の位置を地図に表示 + 各スポットまでの距離を計算
+- **現在地取得** — [Geolocation API](https://developer.mozilla.org/ja/docs/Web/API/Geolocation_API) で自分の位置を地図に表示 + 各スポットまでの距離を計算
 - **キーワード認証** — 現地でもらうキーワードを入力してスタンプを押印（大文字小文字・全半角を自動統一）
-- **進捗管理** — スタンプ取得状況をブラウザのローカルストレージに保存
+- **進捗管理** — [localStorage](https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage) にスタンプ取得状況を保存（ブラウザを閉じても保持）
 - **スタンプ帳** — 取得済みスタンプを一覧表示
-- **Google マップナビ** — 「ここへ向かう」ボタンで目的地までナビ起動
+- **Google マップナビ** — 「ここへ向かう」ボタンで [Google マップ](https://maps.google.com/) のナビを起動
 - **全制覇特典** — 全スポット制覇で「古町マスター」認定画面を表示
 
 ---
@@ -130,10 +143,10 @@
 | 技術 | 用途 |
 | - | - |
 | HTML / CSS / JavaScript | フロントエンド |
-| Leaflet.js v1.9.4 | 地図表示 |
-| OpenStreetMap | 地図タイル |
-| localStorage | スタンプデータの保存 |
-| Geolocation API | 現在地取得 |
+| [Leaflet.js](https://leafletjs.com/) v1.9.4 | 地図表示 |
+| [OpenStreetMap](https://www.openstreetmap.org/) | 地図タイル |
+| [localStorage](https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage) | スタンプデータの保存 |
+| [Geolocation API](https://developer.mozilla.org/ja/docs/Web/API/Geolocation_API) | 現在地取得 |
 
 ---
 
