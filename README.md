@@ -9,6 +9,13 @@
 
 > 新潟コンピュータ専門学校 (NCC) ハッカソン — 🐬 イルカチーム
 
+<details>
+<summary>サイトプレビュー（クリックで展開）</summary>
+
+![プレビュー](img/preview.png)
+
+</details>
+
 ---
 
 ## 目次
