@@ -2,12 +2,18 @@
 
 ![古町印帳](img/thumbnail.png)
 
-## FURUMACHI DIGITAL STAMP RALLY
-
 新潟・古町エリアを歩きながらスタンプを集めるデジタルスタンプラリーアプリです。
 地図でスポットを確認し、現地でキーワードを入力してスタンプをゲットしましょう！
 
 > 新潟コンピュータ専門学校 (NCC) ハッカソン — 🐬 イルカチーム
+
+![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat&logo=html5&logoColor=white)
+![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
+![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=flat&logo=leaflet&logoColor=white)
+![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-7EBC6F?style=flat&logo=openstreetmap&logoColor=white)
+
+**[🌐 ライブデモを開く →](https://ncc-2026-iruka.github.io/hackathon/)**
 
 <details>
 <summary>サイトプレビュー（クリックで展開）</summary>
@@ -20,30 +26,26 @@
 
 ## 目次
 
-- [デモを開く](#デモを開く)
+- [機能一覧](#機能一覧)
 - [使い方](#使い方)
 - [スポット一覧 & キーワード](#スポット一覧--キーワード)
-- [機能一覧](#機能一覧)
+- [ローカルで開く](#ローカルで開く)
 - [技術スタック](#技術スタック)
 - [ファイル構成](#ファイル構成)
+- [メンバー](#メンバー)
 
 ---
 
-## デモを開く
+## 機能一覧
 
-### 方法1: VS Code + Live Server（推奨）
-
-1. このリポジトリをクローンまたはダウンロードする
-2. VS Code で `index.html` を開く
-3. 右下の **「Go Live」** ボタンをクリック
-4. ブラウザで自動的に開く（`http://127.0.0.1:5500` など）
-
-> 地図タイルが確実に表示されます。
-
-### 方法2: index.html を直接開く
-
-`index.html` をダブルクリックしてブラウザで開く。
-地図タイルはほとんどの場合（約9割）読み込まれます。
+- **インタラクティブ地図** — [OpenStreetMap](https://www.openstreetmap.org/) + [Leaflet.js](https://leafletjs.com/) によるピン表示
+- **カテゴリフィルター** — ジャンル別にスポットを絞り込み
+- **現在地取得** — [Geolocation API](https://developer.mozilla.org/ja/docs/Web/API/Geolocation_API) で自分の位置を地図に表示 + 各スポットまでの距離を計算
+- **キーワード認証** — 現地でもらうキーワードを入力してスタンプを押印（大文字小文字・全半角を自動統一）
+- **進捗管理** — [localStorage](https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage) にスタンプ取得状況を保存（ブラウザを閉じても保持）
+- **スタンプ帳** — 取得済みスタンプを一覧表示
+- **Google マップナビ** — 「ここへ向かう」ボタンで [Google マップ](https://maps.google.com/) のナビを起動
+- **全制覇特典** — 全スポット制覇で「古町マスター」認定画面を表示
 
 ---
 
@@ -74,6 +76,9 @@
 ## スポット一覧 & キーワード
 
 > スタンプ取得時に現地で配布・掲示されるキーワードを入力します。
+
+<details>
+<summary>一覧を展開する（全19スポット）</summary>
 
 ### 🚶 散歩
 
@@ -130,18 +135,25 @@
 | - | - |
 | 景品交換所 | `完全制覇` |
 
+</details>
+
 ---
 
-## 機能一覧
+## ローカルで開く
 
-- **インタラクティブ地図** — [OpenStreetMap](https://www.openstreetmap.org/) + [Leaflet.js](https://leafletjs.com/) によるピン表示
-- **カテゴリフィルター** — ジャンル別にスポットを絞り込み
-- **現在地取得** — [Geolocation API](https://developer.mozilla.org/ja/docs/Web/API/Geolocation_API) で自分の位置を地図に表示 + 各スポットまでの距離を計算
-- **キーワード認証** — 現地でもらうキーワードを入力してスタンプを押印（大文字小文字・全半角を自動統一）
-- **進捗管理** — [localStorage](https://developer.mozilla.org/ja/docs/Web/API/Window/localStorage) にスタンプ取得状況を保存（ブラウザを閉じても保持）
-- **スタンプ帳** — 取得済みスタンプを一覧表示
-- **Google マップナビ** — 「ここへ向かう」ボタンで [Google マップ](https://maps.google.com/) のナビを起動
-- **全制覇特典** — 全スポット制覇で「古町マスター」認定画面を表示
+### 方法1: VS Code + Live Server（推奨）
+
+1. このリポジトリをクローンまたはダウンロードする
+2. VS Code で `index.html` を開く
+3. 右下の **「Go Live」** ボタンをクリック
+4. ブラウザで自動的に開く（`http://127.0.0.1:5500` など）
+
+> 地図タイルが確実に表示されます。
+
+### 方法2: index.html を直接開く
+
+`index.html` をダブルクリックしてブラウザで開く。
+地図タイルはほとんどの場合（約9割）読み込まれます。
 
 ---
 
@@ -166,3 +178,48 @@ hackathon/
 ├── script.js    # ロジック（スポットデータ・地図・スタンプ処理）
 └── img/         # スポット画像
 ```
+
+---
+
+## メンバー
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/aaaadsfgw">
+        <img src="https://github.com/aaaadsfgw.png" width="80" alt="aaaadsfgw" /><br />
+        @aaaadsfgw
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Cinnamobot">
+        <img src="https://github.com/Cinnamobot.png" width="80" alt="Cinnamobot" /><br />
+        @Cinnamobot
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/rbzs7vkk29-a11y">
+        <img src="https://github.com/rbzs7vkk29-a11y.png" width="80" alt="rbzs7vkk29-a11y" /><br />
+        @rbzs7vkk29-a11y
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/siryu810">
+        <img src="https://github.com/siryu810.png" width="80" alt="siryu810" /><br />
+        @siryu810
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/tororo-0">
+        <img src="https://github.com/tororo-0.png" width="80" alt="tororo-0" /><br />
+        @tororo-0
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/tunakan777">
+        <img src="https://github.com/tunakan777.png" width="80" alt="tunakan777" /><br />
+        @tunakan777
+      </a>
+    </td>
+  </tr>
+</table>
